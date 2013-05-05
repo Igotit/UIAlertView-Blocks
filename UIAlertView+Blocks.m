@@ -13,6 +13,19 @@ static NSString *RI_BUTTON_ASS_KEY = @"com.random-ideas.BUTTONS";
 
 @implementation UIAlertView (Blocks)
 
++ (id)alertViewWithTitle:(NSString *)inTitle message:(NSString *)inMessage otherButtonTitle:(NSString *)otherButtonTitle otherButtonAction:(void(^)())otherButtonAction;
+{
+    return [UIAlertView alertViewWithTitle:inTitle message:inMessage cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") otherButtonTitle:otherButtonTitle otherButtonAction:otherButtonAction];
+}
+
++ (id)alertViewWithTitle:(NSString *)inTitle message:(NSString *)inMessage cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitle:(NSString *)otherButtonTitle otherButtonAction:(void(^)())otherButtonAction;
+{
+    RIButtonItem *cancelButton = [RIButtonItem itemWithLabel:cancelButtonTitle];
+    RIButtonItem *removeButton = [RIButtonItem itemWithLabel:otherButtonTitle];
+    removeButton.action = otherButtonAction;
+    return [[UIAlertView alloc] initWithTitle:inTitle message:inMessage cancelButtonItem:cancelButton otherButtonItems:removeButton, nil];
+}
+
 -(id)initWithTitle:(NSString *)inTitle message:(NSString *)inMessage cancelButtonItem:(RIButtonItem *)inCancelButtonItem otherButtonItems:(RIButtonItem *)inOtherButtonItems, ... 
 {
     if((self = [self initWithTitle:inTitle message:inMessage delegate:self cancelButtonTitle:inCancelButtonItem.label otherButtonTitles:nil]))

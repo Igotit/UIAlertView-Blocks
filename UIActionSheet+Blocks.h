@@ -11,6 +11,10 @@
 
 @interface UIActionSheet (Blocks) <UIActionSheetDelegate>
 
++ (id)actionSheetWithTitle:(NSString *)title destructiveButtonTitle:(NSString *)destructiveButtonTitle destructiveButtonAction:(void(^)())destructiveButtonAction;
+
++ (id)actionSheetWithTitle:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle destructiveButtonAction:(void(^)())destructiveButtonAction;
+
 -(id)initWithTitle:(NSString *)inTitle cancelButtonItem:(RIButtonItem *)inCancelButtonItem destructiveButtonItem:(RIButtonItem *)inDestructiveItem otherButtonItems:(RIButtonItem *)inOtherButtonItems, ... NS_REQUIRES_NIL_TERMINATION;
 
 - (NSInteger)addButtonItem:(RIButtonItem *)item;

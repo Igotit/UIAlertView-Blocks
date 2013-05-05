@@ -14,6 +14,19 @@ static NSString *RI_DISMISSAL_ACTION_KEY = @"com.random-ideas.DISMISSAL_ACTION";
 
 @implementation UIActionSheet (Blocks)
 
++ (id)actionSheetWithTitle:(NSString *)title destructiveButtonTitle:(NSString *)destructiveButtonTitle destructiveButtonAction:(void(^)())destructiveButtonAction
+{
+    return [UIActionSheet actionSheetWithTitle:title cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:destructiveButtonTitle destructiveButtonAction:destructiveButtonAction];
+}
+
++ (id)actionSheetWithTitle:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle destructiveButtonAction:(void(^)())destructiveButtonAction
+{
+    RIButtonItem *cancelButton = [RIButtonItem itemWithLabel:cancelButtonTitle];
+    RIButtonItem *removeButton = [RIButtonItem itemWithLabel:destructiveButtonTitle];
+    removeButton.action = destructiveButtonAction;
+    return [[UIActionSheet alloc] initWithTitle:title cancelButtonItem:cancelButton destructiveButtonItem:removeButton otherButtonItems:nil];
+}
+
 -(id)initWithTitle:(NSString *)inTitle cancelButtonItem:(RIButtonItem *)inCancelButtonItem destructiveButtonItem:(RIButtonItem *)inDestructiveItem otherButtonItems:(RIButtonItem *)inOtherButtonItems, ...
 {
     if((self = [self initWithTitle:inTitle delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil]))
